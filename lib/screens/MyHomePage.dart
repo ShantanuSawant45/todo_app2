@@ -97,13 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildFeatureCard(FeatureCard feature) {
     return GestureDetector(
       onTap: () {
-        // TODO: Implement navigation to feature screens
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Navigate to ${feature.title}'),
-            duration: const Duration(seconds: 1),
-          ),
-        );
+        Navigator.pushNamed(context, feature.route);
       },
       child: Container(
         decoration: BoxDecoration(
