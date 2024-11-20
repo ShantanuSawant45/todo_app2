@@ -1,18 +1,27 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app2/screens/splash_screen.dart';
-import 'package:todo_app2/screens_budgettracker/budget_tracker.dart';
+import 'Budget_tracker/providers/transaction_provider.dart';
+import 'Budget_tracker/screens_budgettracker/budget_tracker.dart';
+import 'Period_tracker/pages/home_page.dart';
+import 'Period_tracker/providers/period_provider.dart';
 import 'feature_screens/HealthTracker_screen.dart';
-import 'feature_screens/Periodtracker.dart';
 import 'feature_screens/Todo_screen.dart';
-import 'providers/transaction_provider.dart';
 
 
-void main() {
-  runApp(const MyApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => PeriodProvider(prefs),
+      child: const MyApp(),
+    ),
+  );
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -33,7 +42,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/splash': (context) => const SplashScreen(),
           '/todo-list': (context) => const  TodoScreen(),
-          '/period-tracker': (context) => const Periodtracker(),
+          '/period-tracker': (context) => const HomePage_PeriodTracker(),
           '/health-tracker': (context) => const HealthtrackerScreen(),
           '/budget-tracker': (context) => const Budget_tracker_screen(),
         },
