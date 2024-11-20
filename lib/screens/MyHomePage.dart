@@ -133,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               feature.title,
               style: const TextStyle(
+                color: Colors.black,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
