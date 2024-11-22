@@ -1,19 +1,21 @@
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app2/screens/splash_screen.dart';
 import 'Budget_tracker/providers/transaction_provider.dart';
 import 'Budget_tracker/screens_budgettracker/budget_tracker.dart';
+import 'Health_Tracker/pages/home_page.dart';
 import 'Period_tracker/pages/home_page.dart';
 import 'Period_tracker/providers/period_provider.dart';
-import 'feature_screens/HealthTracker_screen.dart';
 import 'feature_screens/Todo_screen.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('health_data');
   final prefs = await SharedPreferences.getInstance();
   runApp(
     ChangeNotifierProvider(
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
           '/splash': (context) => const SplashScreen(),
           '/todo-list': (context) => const  TodoScreen(),
           '/period-tracker': (context) => const HomePage_PeriodTracker(),
-          '/health-tracker': (context) => const HealthtrackerScreen(),
+          '/health-tracker': (context) => const HomePage_healthTracker(),
           '/budget-tracker': (context) => const Budget_tracker_screen(),
         },
         darkTheme: ThemeData(

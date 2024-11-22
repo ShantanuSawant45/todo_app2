@@ -5,6 +5,7 @@ import '../widgets/recent_transactions.dart';
 import 'add_transaction_screen.dart';
 import 'analytics_screen.dart';
 
+
 class Budget_tracker_screen extends StatefulWidget {
   const Budget_tracker_screen({super.key});
 
